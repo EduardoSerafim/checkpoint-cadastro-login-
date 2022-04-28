@@ -25,6 +25,11 @@ public class UsuarioController {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	@GetMapping("/")
+	public ModelAndView home() {
+		return new ModelAndView("home");
+	}
 
 	@GetMapping("/cadastro")
 	public ModelAndView cadastro(UsuarioDto usuario){
@@ -48,7 +53,7 @@ public class UsuarioController {
 		Usuario usuarioEntity = modelMapper.map(usuario, Usuario.class); 
 		usuarioRepository.save(usuarioEntity);
 		
-		return new ModelAndView ("login");
+		return new ModelAndView ("home");
 	}
 	
 	@PostMapping("login")
@@ -61,7 +66,7 @@ public class UsuarioController {
 			if(usuarioI.getNomeUsuario().equals(usuario.getnomeUsuario()) && usuarioI.getSenha().equals(usuario.getSenha())) {
 				return new ModelAndView("home");
 			}
-		}
+		}	
 
 		
 		
